@@ -17,7 +17,7 @@ https://talks.obedmr.com/
 
 ---
 
-## Data types
+# Data types
 
 In a programming language, a data type can be defined in:
 
@@ -30,7 +30,8 @@ In C++, the `int` data type holds a range of values from -2,147,483,648 to 2,147
 
 ---
 
-## Data types 2/2
+
+# Data types 2/2
 
 ```
 #include <iostream> // For std
@@ -50,7 +51,7 @@ source code: [int_limits.cpp](./src/int_limits.cpp)
 ---
 
 
-##  Data Structures 1/2
+#  Data Structures 1/2
 
 - They can be decomposed into a set of elements that can be simple data types or other data structures.
 - Includes a set of associations or relationships between the elements
@@ -61,7 +62,7 @@ An array is a pre-defined data structure in C++
 ---
 
 
-## Data Structures 2/2
+# Data Structures 2/2
 
 ```
     int numbers[5] = {10, 20, 30, 40, 50};
@@ -79,12 +80,12 @@ Source Code: [data_structs_array.cpp](./src/data_structs_array.cpp)
 
 # Abstraction?
 
-
 _**A mental process** that extracts the **essential features** of "something" in order to represent them **through a graphic or written language.**_
 
 ---
 
-## So, Data Abstraction
+
+# So, Data Abstraction
 
 - It's a methodology that is used to design data structures
 - During the design of the data structure:
@@ -95,7 +96,7 @@ _**A mental process** that extracts the **essential features** of "something" in
 ---
 
 
-## Abstract Data Type (ADT)
+# Abstract Data Type (ADT)
 
 - Is a set of objects together with a set of operations
 - Abstract data types are mathematical abstractions
@@ -115,7 +116,8 @@ Some key things to consider:
 
 ---
 
-## ADT: Elements
+
+# ADT: Elements
 
 Define the data type of the elements that the ADT structure will store
 
@@ -128,7 +130,8 @@ Define the data type of the elements that the ADT structure will store
 
 ---
 
-## ADT: Organization
+
+# ADT: Organization
 
 ![bg fit](images/adt_linear.png)
 ![bg fit](images/adt_hierarchical.png)
@@ -137,8 +140,300 @@ Define the data type of the elements that the ADT structure will store
 
 ---
 
-## Let's code:
 
+# ADT: Domain
+
+It defines the range of possible values that can be stored and operated upon the structure
+
+**Example: Character ADT**
+
+_The domain is the set of all characters representable by a specific character encoding (e.g., ASCII, Unicode). Operations include comparison, conversion to uppercase/lowercase, checking character type (digit, letter, etc.)._
+
+---
+
+
+# ADT: Operations
+
+For each of the operations, the following should be considered:
+
+- Name of the operation
+- Brief description of its usefulness
+- Input data
+- Output data
+- Pre-conditions
+- Post-conditions
+
+**Example:** Take a look in the [queue](https://cplusplus.com/reference/queue/queue/) ADT and its operations
+
+---
+
+
+## ADT: Operations - Pre-conditions
+
+**Pre-condition:**
+_It is the condition that must be met before executing the operation, so that it work properly_
+
+**Question:**
+What would be a _pre-condition_ for using the [`push()`](https://cplusplus.com/reference/queue/queue/push/) function?
+
+---
+
+
+## ADT: Operations - Post-conditions
+
+**Post-condition:**
+_ Description of the state in which the ADT remains after executing the operation_
+
+**Question:**
+What would be a _post-condition_ for using the [`pop()`](https://cplusplus.com/reference/queue/queue/pop/) function?
+
+---
+
+
+# ADT: Levels of Abstraction
+
+- **Logical or abstract**. At this level, the ADT is designed through logical specification
+- **Physical or implementation**. At this level, each of the ADT's operation is implemented (ie. `size`, `push`, `pop`, `empty` ...)
+- **Aplication or use**. At this level, programs are implemented that will use the data structure (ADT).
+
+---
+
+
+# ADT: At which level of abstraction? 1/2
+
+**Use case:**
+
+Let's think about a `square_root` function. If the pre-condition for the operation that obtains the square root of a number is: _“the number must be positive”_.
+
+**Question**: At what level of abstraction must it be verified that the number to be square rooted is positive?
+
+---
+
+
+# ADT: At which level of abstraction? 2/2
+
+**Answer:**
+
+_**The Application Level**, since the number must be verified to be positive **BEFORE** calling the operation._
+
+---
+
+
+# Data types
+
+- Primitives or Scalars - _they have a single value_
+  Examples: `int`, `float`, `bool`, `char`
+- Compounds - _collection of elements_
+  Examples: `arrays`, `pointers`, `structs`, `unions`, `enums`, `classses` ...
+  - These can be:
+    - homogeneous (e.g. array)
+    - heterogeneous (e.g. a class)
+    - combined (e.g. an array of objects)
+
+---
+
+
+# Characteristics of the arrays
+
+- They contain homogeneous data
+- You can access the _i-th_ element directly
+- They're commonly defined by a fixed size, so you cannot add more elements
+- If it's not used completely, it's a waste of memory space
+- To insert an element in an occupied space, it's neeeded to move all the other elements
+
+---
+
+# Linked Lists
+
+---
+
+## Linked Lists: Intro 1/3
+
+- The linked list consists of a series of nodes (or elements), which are not necessarily adjacent in memory.
+- Each node contains the element and a link to a node containing its successor. We call this the `next` link.
+- The last cell’s next link points to `nullptr`.
+
+![bg vertical](.)
+![bg ](.)
+![bg fit](images/linked_list.png)
+
+---
+
+
+## Linked Lists: Intro 2/3
+
+- Each node in the list will be created on demand; so, no memory space is used until required, and memory space is not necessarily continuous.
+- Above property can be seen as disadvantage, because it's required for every node to store "extra" information about the next node.
+
+![bg vertical](.)
+![bg ](.)
+![bg fit](images/linked_list.png)
+
+---
+
+
+## Linked Lists: Intro 3/3
+
+- Each node in the linked list contains one field called `next`
+- The `next` field of the last node contains `null`
+
+![bg vertical](.)
+![bg fit](images/linked_list_next.png)
+
+---
+
+
+## Linked Lists: The `Node` class
+
+```
+template <class T>
+class Node {
+  public:
+    node(T data);
+    node(T data, node<T>* next); T getData();
+    node<T>* getNext();
+    void setData(T data);
+    void setNext(node<T> *next);
+  private:
+    T data;
+    node<T> *next;
+};
+```
+Source code: [node.cpp](./src/node.cpp)
+
+---
+
+## Linked Lists: The `LinkedList` class
+
+```
+class LinkedList {
+  Node *head;
+  private int size;
+  public LinkedList() {
+    head = NULL;
+    size = 0;
+  }
+};
+```
+
+Source code: [linked_list.cpp](./src/linked_list.cpp)
+
+---
+
+
+## Linked Lists: a first glance
+
+- We will call the reference to the first node in the list `head`.
+- An empty list will have `null` in the `head`.
+
+![bg vertical](.)
+![bg contain](./images/linked_list_empty.png)
+
+--- 
+
+## Linked Lists: `AddFirst` operation 1/3
+
+**Action:**
+The element is added at the beginning of the list
+
+**Procedure**:
+  - It will look fro the `head`of the list and it will point to the new element
+  - The new node will have its `next` field pointing to the last node that was pointed by the `head`
+
+---
+
+
+## Linked Lists: `AddFirst` operation 2/3
+
+```
+linked_list.AddFirst("Plato");
+```
+![bg vertical](.)
+![bg contain](./images/linked_list_AddFirst.png)
+
+---
+
+
+## Linked Lists: `AddFirst` operation 3/3
+
+```
+void AddFirst(char *value) {
+    Node* new_node = new Node(value);
+    newNode->next = head;
+    head = new_node;
+}
+```
+
+Source code: [linked_list.cpp](./src/linked_list.cpp)
+
+---
+
+
+## Linked Lists: `AddLast` operation 1/3
+
+**Action:**
+The element is added at the **end** of the list
+
+**Procedure**:
+  - It will go the the **end** of the list, and
+  - at the last element, the `next` field will be modified to the new created `node`
+
+---
+
+
+## Linked Lists: `AddLast` operation 2/3
+
+```
+linked_list.AddLast("Plato");
+```
+![bg vertical](.)
+![bg contain](./images/linked_list_AddLast.png)
+
+---
+
+
+## Linked Lists: `AddLast` operation 3/3
+
+<style scoped>
+  pre > code {
+  font-size: 60%;
+}
+</style>
+
+```cpp
+void AddLast(char* value) {
+  Node* new_node = new Node(value);
+
+  if (head == nullptr) {
+    head = new_node;
+    return;
+  }
+
+  Node* current = head;
+  while (current->next != nullptr) {
+    current = current->next;
+  }
+
+  current->next = new_node;
+}
+```
+
+
+Source code: [linked_list.cpp](./src/linked_list.cpp)
+
+---
+
+
+# Let's code:
+
+Implement the following 2 functions in the `LinkedList` class.
+
+- `int Size();`
+  _Returns the number of elements of the linked list_
+- `void Delete(T value);`
+  _Deletes `value` from the linked list. If the `value` doesn't exist, do nothing_
+
+Source code: [linked_list.cpp](./src/linked_list.cpp)
 
 
 ---
@@ -146,8 +441,8 @@ Define the data type of the elements that the ADT structure will store
 # Resources and Credits
 This material is genereated thanks to some extracts from following resources:
 
-- 
-
+- Data Structures and Algorithms ... book
+- Ing. Luis Humberto González slides
 
 ---
 
