@@ -11,7 +11,7 @@ all: public
 
 html :
 	$(CONTAINER_ENGINE) run --rm -v ${PWD}:/mnt -e MARP_USER="$(id -u):$(id -g)" \
-	-e LANG=${LANG} -p 8080:8080 -p 37717:37717 marpteam/marp-cli -I /mnt --html
+	-e LANG=${LANG} -p 8080:8080 -p 37717:37717 marpteam/marp-cli -I /mnt --html --allow-local-files
 
 pdf :
 	$(CONTAINER_ENGINE) run --rm -v ${PWD}:/mnt -e MARP_USER="$(id -u):$(id -g)" \

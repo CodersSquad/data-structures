@@ -9,7 +9,7 @@ backgroundImage: url('https://marp.app/assets/hero-background.svg')
 
 ![bg left fit](./images/first_page.jpg)
 
-# **1. Data Abstraction**
+# **Data Abstraction**
 ## ...
 
 https://talks.obedmr.com/
