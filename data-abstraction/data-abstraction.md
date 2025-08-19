@@ -7,7 +7,7 @@ backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.svg')
 ---
 
-![bg left fit](http://graphics.stanford.edu/courses/cs348c/images/pixar_8999674.jpg)
+![bg left fit](./images/first_page.jpg)
 
 # **1. Data Abstraction**
 ## ...
@@ -285,18 +285,13 @@ _**The Application Level**, since the number must be verified to be positive **B
 
 ## Linked Lists: The `Node` class
 
-```
-template <class T>
+```cpp
+template <typename T>
 class Node {
-  public:
-    node(T data);
-    node(T data, node<T>* next); T getData();
-    node<T>* getNext();
-    void setData(T data);
-    void setNext(node<T> *next);
-  private:
-    T data;
-    node<T> *next;
+public:
+  T data;
+  Node<T>* next;
+  Node(T value): data(value), next(nullptr) {};
 };
 ```
 Source code: [node.cpp](./src/node.cpp)
@@ -305,11 +300,16 @@ Source code: [node.cpp](./src/node.cpp)
 
 ## Linked Lists: The `LinkedList` class
 
-```
+```cpp
+template <typename T>
 class LinkedList {
-  Node *head;
-  private int size;
-  public LinkedList() {
+
+private:
+  int size;
+  Node<T> *head;
+
+public:
+  LinkedList() {
     head = NULL;
     size = 0;
   }
@@ -356,12 +356,12 @@ linked_list.AddFirst("Plato");
 
 ## Linked Lists: `AddFirst` operation 3/3
 
-```
-void AddFirst(char *value) {
-    Node* new_node = new Node(value);
-    newNode->next = head;
+```cpp
+  void AddFirst(T value) {
+    Node<T>* new_node = new Node<T>(value);
+    new_node->next = head;
     head = new_node;
-}
+  }
 ```
 
 Source code: [linked_list.cpp](./src/linked_list.cpp)
@@ -401,21 +401,21 @@ linked_list.AddLast("Plato");
 </style>
 
 ```cpp
-void AddLast(char* value) {
-  Node* new_node = new Node(value);
-
-  if (head == nullptr) {
-    head = new_node;
-    return;
+  void AddLast(T value) {
+    Node<T>* new_node = new Node<T>(value);
+    
+    if (head == nullptr) {
+      head = new_node;
+      return;
+    }
+    
+    Node<T>* current = head;
+    while (current->next != nullptr) {
+      current = current->next;
+    }
+    
+    current->next = new_node;
   }
-
-  Node* current = head;
-  while (current->next != nullptr) {
-    current = current->next;
-  }
-
-  current->next = new_node;
-}
 ```
 
 
@@ -441,8 +441,9 @@ Source code: [linked_list.cpp](./src/linked_list.cpp)
 # Resources and Credits
 This material is genereated thanks to some extracts from following resources:
 
-- Data Structures and Algorithms ... book
-- Ing. Luis Humberto González slides
+- Weiss, Mark Allen. *Data Structures and Algorithm Analysis in C++*. 4th ed. Boston: Pearson, 2014.
+- Humberto González, Luis. *Abstraccion de Datos*
+- Google-generated code with `AI Overview`
 
 ---
 
