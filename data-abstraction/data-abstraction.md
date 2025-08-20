@@ -182,7 +182,7 @@ What would be a _pre-condition_ for using the [`push()`](https://cplusplus.com/r
 ## ADT: Operations - Post-conditions
 
 **Post-condition:**
-_ Description of the state in which the ADT remains after executing the operation_
+_Description of the state in which the ADT remains after executing the operation_
 
 **Question:**
 What would be a _post-condition_ for using the [`pop()`](https://cplusplus.com/reference/queue/queue/pop/) function?
@@ -294,7 +294,7 @@ public:
   Node(T value): data(value), next(nullptr) {};
 };
 ```
-Source code: [node.cpp](./src/node.cpp)
+Source code: [node.h](./src/node.h)
 
 ---
 
@@ -337,7 +337,7 @@ Source code: [linked_list.cpp](./src/linked_list.cpp)
 The element is added at the beginning of the list
 
 **Procedure**:
-  - It will look fro the `head`of the list and it will point to the new element
+  - It will look for the `head`of the list and it will point to the new element
   - The new node will have its `next` field pointing to the last node that was pointed by the `head`
 
 ---
