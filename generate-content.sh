@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sections=(data-abstraction)
+sections=(data-abstraction recursion)
 
 rm -rf public
 
