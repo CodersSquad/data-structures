@@ -230,28 +230,165 @@ for (int i=1; i<=n; i++)
 
 # Rules to calculate complexity
 
-1. Sequence of instructions
-2. Decisions (e.g. `if`)
-3. Loops (e.g. `for`, `while`)
+1. Loops
+2. Nested Loops
+3. Consecutive Statements
+4. If / Else
 4. Recursivity
 
 ---
 
 
+## Complexity Analysis: Loops
 
-# Let's code:
+The running time of a for loop is at most the running time of the statements inside the for loop (including tests) times the number of iterations.
 
-Implement the following 2 functions in the `LinkedList` class.
+```
+for (int i=1; i<=n; i++)
+   suma += array[i];
+   array[i] = array[i] * 2;
+```
 
-- `int Size();`
-  _Returns the number of elements of the linked list_
-- `void Delete(T value);`
-  _Deletes `value` from the linked list. If the `value` doesn't exist, do nothing_
-
-Source code: [linked_list.cpp](./src/linked_list.cpp)
-
+**Question:** What would be the running time in the Big-O notation?
 
 ---
+
+
+## Complexity Analysis: Nested Loops
+
+The total running time of a statement inside a group of nested loops is the running time of the statement multiplied by the product of the sizes of all the loops. **Let's try below:**
+
+<style scoped>
+pre {
+  font-size: 32px; /* Adjust this value as needed */
+}
+</style>
+```
+// Example 1
+for( i = 0; i < n; ++i )
+  for( j = 0; j < n; ++j )
+    ++k;
+
+// Example 2
+for( i = 0; i < n; ++i )
+  for( j = 0; j < n; ++j ) {
+    ++k;
+    array[i] = k*2;
+  }
+```
+
+---
+
+
+## Complexity Analysis: Consecutive Statements
+
+These just add (which means that the maximum is the one that counts).
+
+```
+for( i = 0; i < n; ++i )
+  a[ i ] = 0;
+for( i = 0; i < n; ++i )
+  for( j = 0; j < n; ++j )
+    a[ i ] += a[ j ] + i + j;
+```
+
+**Question:** And ... What would be the running time for this?
+
+---
+
+
+**And** ... what about the matrix multiplication algorithm?
+
+![bg contain left:40%](./images/matrix_multiplication.png)
+
+
+```
+for (int i=1; i<=n; i++)
+    for (int j=1; j<=n; j++) {
+      C[i,j] = 0;
+      for (int k=1; k<=n; k++)
+        C[i,j] = C[i,j] + A[i,k]*B[k,j];
+    }
+```
+
+**Question,** what's the running time?
+
+---
+
+
+## Complexity Analysis: `if` / `else`
+
+```
+long factorial( int n ) {
+  if( n <= 1 )
+    return 1; // S1
+  else
+    return n * factorial( n - 1 ); // S2
+}
+```
+
+The running time of an `if/else` statement is never more than the running time of the test plus the larger of the running times of S1 and S2.
+
+
+**So,** from the example above, What would be the running time?
+
+---
+
+
+## Complexity Analysis: Recursivity
+
+The running time is caculated by the number of recursive calls.
+
+Common cases:
+- *Lineal order*, if there's only one recursive call, with increments or decrements in the control parameters
+- *Logarithmic order*, si there one recursive call, with multiplications and divisions in the control parameter
+- *Exponential order*, if there are more than one recursive call
+
+---
+
+
+## Example: Fibonacci Algorithm (iterative)
+
+```
+ant = 1;
+act = 1;
+while (n>2) {
+  aux = ant + act; ant = act;
+  act = aux;
+  n = n - 1;
+}
+printf("%d",act);
+```
+
+**Question:** What would be running time?
+
+---
+
+
+## Example: Fibonacci Algorithm (recursive)
+
+```
+int fibonacci(int n) {
+  if (n < 3)
+    return 1;
+  else
+    return fibonacci(n-1) + fibonacci(n-2);
+```
+
+**Question:** What would be running time?
+
+---
+
+# Let's code: Fibonacci Analysis
+
+- Write one program that will run iterative and recursive fibonacci
+- 2 functions must exists `iterative_fibonacci` and `recursive_fibonacci`
+- You need to modify de `main` functions to support the following execution modes:
+  - `./main --iterative <n_start> <n_end>`
+  - `./main --recursive <n_start> <n_end>`
+- Meassure the execution time for each `n` iteration and print it; and later graph it with your favorite graphics tool
+---
+
 
 # Resources and Credits
 This material is genereated thanks to some extracts from following resources:
@@ -259,8 +396,7 @@ This material is genereated thanks to some extracts from following resources:
 - Weiss, Mark Allen. *Data Structures and Algorithm Analysis in C++*. 4th ed. Boston: Pearson, 2014.
 - Humberto González, Luis. *Abstraccion de Datos*
 - Erickson, Jeff. *Algorithms* ...
-
-- https://thegeekplanets.medium.com/the-ultimate-guide-to-complexity-analysis-in-data-structures-and-algorithms-c4f9be147a54
+- [The Geeks Planet Medium](https://thegeekplanets.medium.com/the-ultimate-guide-to-complexity-analysis-in-data-structures-and-algorithms-c4f9be147a54)
 - Google-generated code with `AI Overview`
 
 ---
