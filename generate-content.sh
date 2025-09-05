@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sections=(data-abstraction recursion complexity-analysis)
+sections=(data-abstraction recursion complexity-analysis search)
 
 rm -rf public
 
