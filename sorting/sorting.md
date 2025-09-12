@@ -61,7 +61,7 @@ The above process is repeated through the whole array until there are no more sw
 
 **Its complexity:**
 - Best Case - $O(n)$
-- Worst Case -  $)(n^2)$
+- Worst Case -  $(n^2)$
 
 ---
 
@@ -239,14 +239,192 @@ Source Code: [`insertion_sort.cpp`](./src/insertion_sort.cpp)
 ---
 
 
-## Merge Sort
+## Merge Sort 1/6
 
+_This is a recursive algorithm that divides the array by 2 and then sort each one of the in a recursive way._
+
+This algorithm follows the [divide-and-conquer](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm) principle.
+
+**Its complexity:**
+- Best Case - $O(n)$
+- Worst Case -  $O(n*log\;n)$
 
 ---
 
 
-## Quick Sort
+![bg fit](./images/mergesort.png)
 
+---
+
+
+## Merge Sort 3/6
+
+```
+// Recursively divides the array and sorts subarrays
+void mergeSort(std::vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int mid = low + (high - low) / 2; // Calculate the middle index
+
+        // Recursively sort the left and right halves
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid + 1, high);
+
+        // Merge the sorted halves
+        merge(arr, low, mid, high);
+    }
+}
+```
+Source code: [merge_sort.cpp](./src/merge_sort.cpp)
+
+---
+
+
+```
+// Merges two sorted subarrays into a single sorted array
+void merge(std::vector<int>& arr, int low, int mid, int high) {
+    std::vector<int> temp; // Temporary array for merging
+    int left = low;        // Starting index of the left subarray
+    int right = mid + 1;   // Starting index of the right subarray
+
+    // Merge elements into the temporary array in sorted order
+    while (left <= mid && right <= high) {
+        if (arr[left] <= arr[right]) {
+            temp.push_back(arr[left]);
+            left++;
+        } else {
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+    .
+    .
+    .
+}
+
+```
+
+
+---
+
+```
+// Merges two sorted subarrays into a single sorted array
+void merge(std::vector<int>& arr, int low, int mid, int high) {
+
+    .
+    .
+    .
+
+    // Copy any remaining elements from the left subarray
+    while (left <= mid) {
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    // Copy any remaining elements from the right subarray
+    while (right <= high) {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    // Copy the sorted elements from the temporary array back to the original array
+    for (int i = low; i <= high; i++) {
+        arr[i] = temp[i - low];
+    }
+}
+```
+
+
+---
+
+## Merge Sort 6/6
+
+**Quick Excercise**
+
+How may sub-arrays would be created in the following array:
+
+```
+arr = [20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+```
+
+Source code: [merge_sort.cpp](./src/merge_sort.cpp)
+
+---
+
+
+## Quick Sort 1/5
+
+_Yet another [divide-and-conquer](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm) algorithm, but with a pivot_
+
+The election of the pivot is free, a simple pivot's choosing technique is just taking the first or the last element of the array.
+
+Then, create 2 sub-arrays, one will contain the smaller values, and other with bigger values than the pivot
+
+**Its Complexity**
+- Average case - $O(n\;log\;n)$
+- Worst case - $O(n^2)$
+
+---
+
+
+![bg fit](./images/quicksort.png)
+
+---
+
+
+## Quick Sort 3/5
+
+```
+// Main Quicksort function
+void quickSort(std::vector<int>& arr, int low, int high) {
+    if (low < high) {
+        // pi is partitioning index, arr[pi] is now at right place
+        int pi = partition(arr, low, high);
+
+        // Separately sort elements before partition and after partition
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+```
+
+Source code: [quick_sort.cpp](./src/quick_sort.cpp)
+
+---
+
+
+## Quick Sort 4/5
+
+```
+// Function to partition the array and return the pivot's final index
+int partition(std::vector<int>& arr, int low, int high) {
+    int pivot = arr[high]; // Choosing the last element as the pivot
+    int i = (low - 1);     // Index of smaller element
+
+    for (int j = low; j <= high - 1; j++) {
+        // If current element is smaller than or equal to pivot
+        if (arr[j] <= pivot) {
+            i++; // Increment index of smaller element
+            std::swap(arr[i], arr[j]);
+        }
+    }
+    std::swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+```
+
+---
+
+## Quick Sort 5/5
+
+**Quick Excercise**
+
+Let's figure out what's the best pivot choosing technique ($first$, $last$, $middle$ or $n^{th}$ element) for the following array:
+
+```
+arr = [32,14,67,84,39,96,19,32,52,59,1,30,14,97,96,73,55,46,16,19]
+```
+
+Source code: [quick_sort.cpp](./src/quick_sort.cpp)
 
 ---
 
