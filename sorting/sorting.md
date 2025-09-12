@@ -20,7 +20,7 @@ https://talks.obedmr.com/
 
 Simple, if we don't sort them, we cannot find it
 
-**Think about** a list of unsorted phone numbers from the `Contacts` App in your phone. And also, imagine that you don't have a seach field. How would you find your contacts?
+**Think about** a list of unsorted phone numbers from the `Contacts` App in your phone. And also, imagine that you don't have a search field. How would you find your contacts?
 
 ---
 
