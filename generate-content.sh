@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sections=(data-abstraction recursion complexity-analysis search sorting memory)
+sections=(data-abstraction recursion complexity-analysis search sorting memory non-linear-structures)
 
 rm -rf public
 
