@@ -126,11 +126,121 @@ struct Node {
 };
 ```
 
-Source Code: [`binary_tree.cpp`](./src/binary_tree.cpp)
+Source Code: [`binary_search_tree.cpp`](./src/binary_search_tree.cpp)
 
 ---
 
-## TBD
+## Binary Search Tree: Insert
+
+```
+Node* insert(Node* node, int key) {
+    if (node == NULL) 
+        return new Node(key);    
+    
+    if (node->key == key) 
+        return node;
+    
+    if (node->key < key) 
+        node->right = insert(node->right, key);    
+    else 
+        node->left = insert(node->left, key);
+    return node;
+}
+```
+
+Play at: [Tree Visualizer](https://treeconverter.com/?input=21,13,33,10,18,25,40), Source Code:  [`binary_search_tree.cpp`](./src/binary_search_tree.cpp)
+
+---
+
+
+## Binary Search Tree: Insert - _let's play_
+
+Let's try with the following list of elements
+
+```
+100, 164, 130, 189, 244, 42, 141, 231, 20, 153
+```
+
+At the end, verify at: [Tree Visualizer](https://treeconverter.com/?input=100,164,130,189,244,42,141,231,20,153)
+
+---
+
+## Binary Search Tree: Insert - _comments_
+
+- The order of insertions will define the form of the tree
+- The form of the tree will define the eficiency of searching process
+
+**Think about it:**
+- What would happen if we insert all nodes in order?
+
+```
+1,2,3,4,5,5,6,7,8,9
+```
+
+Check it out at: [Tree Visualizer](https://treeconverter.com/?input=1,2,3,4,5,6,7,8,9)
+
+_So, the higher the tree, the less efficient that search will be_
+
+---
+
+## Binary Search Tree: Search
+
+Do you remember the binary search algorithm?
+
+_Yes, it's the same but with trees_
+```
+Node* search(Node* root, int val) {
+    if (root == nullptr || root->key == val) {
+        return root;
+    }
+    if (val < root->key) {
+        return search(root->left, val);
+    } else {
+        return search(root->right, val);
+    }
+}
+```
+
+---
+
+## Binary Search Tree: Delete
+
+There are three cases to consider when deleting a node:
+- The target node is a `leaf`
+- The target node has a single `child`
+- The target node has 2 `children`
+
+---
+
+
+## Binary Search Tree: Delete - Let's code
+
+There are 2 ways to arrange a tree after deletion of a node with 2 children.
+- Replacing deleted node by its immeditate predecessor
+- Replacing deleted node by its immediate successor  
+
+In our [sample code](./src/binary_search_tree.cpp) we implemented the `findMin` function to help the `deleteNode`. The `findMin` will get the in-order minimum successor, and then use it to replace the deleted node.
+
+
+---
+
+
+How would you implement `findSuccessor` and `findPredecessor`?
+
+![](./images/remove_successor_predecessor.png)
+
+---
+
+Test with this tree
+Remove `8`, `3` and `10`
+
+[Visualizer link](https://treeconverter.com/?input=8,3,1,6,4,7,10,14,13)
+
+![bg contain](./images/sample_complete_tree.png)
+
+---
+
+# Traversals in Binary Trees
 
 ---
 
