@@ -7,7 +7,7 @@ backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.svg')
 ---
 
-![bg left fit](https://martinlwx.github.io/img/program_layout_in_memory.png)
+![bg left fit](https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Max-Heap.svg/1000px-Max-Heap.svg.png)
 
 # **Heaps**
 ## An improve to BST
